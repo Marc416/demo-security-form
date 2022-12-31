@@ -12,7 +12,7 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity?) {
         // 인가
         http!!.authorizeRequests()
-                .mvcMatchers("/", "/info")
+                .mvcMatchers("/", "/info","/account/**")
                 .permitAll()
                 .mvcMatchers("/admin")
                 .hasRole("ADMIN")
