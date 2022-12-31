@@ -1,5 +1,6 @@
 package com.example.demospringsecurityform.account.domain.entity
 
+import org.springframework.security.crypto.password.PasswordEncoder
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
@@ -14,7 +15,10 @@ class Account {
     lateinit var password: String
     lateinit var role: String
 
-    fun encodePassword() {
-        password = "{noop}$password"
+    fun encodePassword(passwordEncoder: PasswordEncoder) {
+
+        // password = "{noop}$password" // 패스워드 인코더로 인코딩
+        password = passwordEncoder.encode(password)
+        print(password)
     }
 }
