@@ -11,9 +11,19 @@ class Account {
     @Id
     @GeneratedValue
     val id: Int = 0
-    lateinit var username: String
-    lateinit var password: String
-    lateinit var role: String
+    val username: String
+    var password: String
+    val role: String
+
+    constructor(
+        username: String,
+        password: String,
+        role: String,
+    ) {
+        this.username = username
+        this.password = password
+        this.role = role
+    }
 
     fun encodePassword(passwordEncoder: PasswordEncoder) {
 
