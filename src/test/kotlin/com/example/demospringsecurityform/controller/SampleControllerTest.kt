@@ -46,7 +46,7 @@ internal class SampleControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "joonhee", roles = ["USER"])
+    @WithUserJoonHeeAnnotation      // 커스텀 어노테이션으로 중복된 로그인된 유저코드를 줄일 수 있음
     fun `어노테이션사용시-이미 로그인한 유저가 인덱스로 접근`() {
         mockMvc.perform(get("/"))
                 .andDo(MockMvcResultHandlers.print())
