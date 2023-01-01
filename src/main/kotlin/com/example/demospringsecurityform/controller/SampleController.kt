@@ -1,12 +1,18 @@
 package com.example.demospringsecurityform.controller
 
+import com.example.demospringsecurityform.account.domain.entity.Account
+import com.example.demospringsecurityform.account.domain.service.AccountService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.ModelAttribute
 import java.security.Principal
 
+//@RestController   //  thymeleaf 를 쓸경우 RestController 대신 Controller를 써야 적용된다.
 @Controller
-class SampleController {
+class SampleController(
+    val accountService: AccountService,
+) {
     @GetMapping("/")
     fun index(model: Model, principal: Principal?): String {
 
