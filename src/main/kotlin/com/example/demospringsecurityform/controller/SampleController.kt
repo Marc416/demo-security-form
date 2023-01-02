@@ -1,6 +1,8 @@
 package com.example.demospringsecurityform.controller
 
 import com.example.demospringsecurityform.account.domain.entity.Account
+import com.example.demospringsecurityform.account.domain.entity.AccountContext
+import com.example.demospringsecurityform.account.domain.repository.AccountRepository
 import com.example.demospringsecurityform.account.domain.service.AccountService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -12,6 +14,7 @@ import java.security.Principal
 @Controller
 class SampleController(
     val accountService: AccountService,
+    val accountRepository: AccountRepository,
 ) {
     @GetMapping("/")
     fun index(model: Model, principal: Principal?): String {
@@ -38,6 +41,10 @@ class SampleController(
     fun dashboard(model: Model, principal: Principal): String {
         // Index html 에서 message 파라미터에 대한 vaalue
         model.addAttribute("message", "dashboard" + principal.name)
+
+        // ThreadLocal 에 Account 저장
+        AccountContext.setAccount(accountRepository.findByUsername(principal.name))
+        accountService.dashboard()
         // spring mvc 기본설정에 따라서 index.html 반환
         return "dashboard"
     }

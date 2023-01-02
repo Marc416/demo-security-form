@@ -18,6 +18,8 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
         http!!.authorizeRequests()
                 .mvcMatchers("/", "/info", "/account/**")
                 .permitAll()
+                .mvcMatchers("/dashboard")
+                .hasRole("USER")
                 .mvcMatchers("/admin")
                 .hasRole("ADMIN")
                 .anyRequest()

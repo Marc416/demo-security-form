@@ -97,22 +97,16 @@ internal class SampleControllerTest {
     }
 
     @Test
-    @Transactional
-    fun `비밀번호가 다른겨우 로그인폼에 로그인 불가`() {
+    @WithUserJoonHeeAnnotation
+    fun `dashboard 에서 threadlocal로 account 정보가져오기`() {
         // Arrange
         val username = "joonhee"
         val password = "1234"
         val role = "USER"
         val user = Account(username = username, password = password, role = role)
-
         accountService.create(user)
-
-        // Action, Assert
-        mockMvc.perform(
-            SecurityMockMvcRequestBuilders.formLogin()
-                    .user(username)
-                    .password("12345")
-        )
-                .andExpect(SecurityMockMvcResultMatchers.unauthenticated())
+        mockMvc.perform(get("/dashboard"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().is2xxSuccessful)
     }
 }

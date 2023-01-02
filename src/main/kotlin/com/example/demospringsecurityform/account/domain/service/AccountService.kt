@@ -1,6 +1,7 @@
 package com.example.demospringsecurityform.account.domain.service
 
 import com.example.demospringsecurityform.account.domain.entity.Account
+import com.example.demospringsecurityform.account.domain.entity.AccountContext
 import com.example.demospringsecurityform.account.domain.repository.AccountRepository
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
@@ -28,6 +29,10 @@ class AccountService(val accountRepository: AccountRepository,val passwordEncode
     fun create(account: Account): Account {
         account.encodePassword(passwordEncoder)
         return accountRepository.save(account)
+    }
+
+    fun dashboard(){
+        println("threadLocal 에서 꺼낸 ${AccountContext.getAccount().username} ")
     }
 
 }

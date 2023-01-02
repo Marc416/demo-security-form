@@ -13,7 +13,9 @@ class AccountController(
     val accountService: AccountService
 ) {
     @GetMapping("/account/{role}/{username}/{password}")
-    fun saveAccount(@ModelAttribute account: Account): Account {
+    fun saveAccount(
+    @ModelAttribute account: Account) :Account{
+        println()
         // RestController 로 인해서 json으로 리턴
         return accountService.create(account)
     }

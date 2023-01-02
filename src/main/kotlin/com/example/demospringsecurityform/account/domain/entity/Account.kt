@@ -6,24 +6,25 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 
 @Entity
-class Account {
-
+class Account(
     @Id
     @GeneratedValue
-    val id: Int = 0
-    val username: String
-    var password: String
-    val role: String
+    val id: Int = 0,
+    val username: String,
+    var password: String,
+    val role: String,
+) {
 
-    constructor(
-        username: String,
-        password: String,
-        role: String,
-    ) {
-        this.username = username
-        this.password = password
-        this.role = role
-    }
+// @ModelAttribute 에서 constructor 를 이용하지를 못했음 왜그랬는지 알필요있음
+//    constructor(
+//        username: String,
+//        password: String,
+//        role: String,
+//    ) {
+//        this.username = username
+//        this.password = password
+//        this.role = role
+//    }
 
     fun encodePassword(passwordEncoder: PasswordEncoder) {
 
